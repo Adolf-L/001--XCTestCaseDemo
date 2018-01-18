@@ -32,6 +32,30 @@
     [super tearDown];
 }
 
+
+//中文是有转码有问题
+//@"\U8d26\U53f7\Uff1a"
+//@"\U767b\U9646"
+//如何进行转码？
+
+- (void)testLoginProcess {
+    
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    XCUIElementQuery *accountElementsQuery = [app.otherElements containingType:XCUIElementTypeStaticText identifier:@"Account:"];
+    XCUIElement *textField = [[accountElementsQuery childrenMatchingType:XCUIElementTypeTextField] elementBoundByIndex:0];
+    [textField tap];
+    [textField typeText:@"8888888"];
+    
+    XCUIElement *textField2 = [[accountElementsQuery childrenMatchingType:XCUIElementTypeTextField] elementBoundByIndex:1];
+    [textField2 tap];
+    [textField2 tap];
+    [textField2 typeText:@"88888888"];
+    [app.buttons[@"Login"] tap];
+    
+}
+
+
+
 - (void)testExample {
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
